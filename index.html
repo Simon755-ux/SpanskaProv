@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanska Verbövningar Åk 9</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .screen {
+            display: none;
+            padding: 30px;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        .mode-selector {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .mode-btn {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .mode-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .mode-btn:not(.active) {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .mode-btn:hover:not(.active) {
+            background: #667eea;
+            color: white;
+        }
+        
+        .section-list {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .section-checkbox {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .section-checkbox:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
+        
+        .section-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .section-checkbox label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 1.1em;
+        }
+        
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #666;
+        }
+        
+        .question-section {
+            font-size: 0.9em;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .question-hint {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            transition: border-color 0.3s;
+            margin-bottom: 15px;
+        }
+        
+        .answer-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .answer-input.correct {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+        
+        .answer-input.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+        
+        .feedback {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            display: none;
+        }
+        
+        .feedback.show {
+            display: block;
+        }
+        
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+        
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+        
+        .attempts {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #666;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .results-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .results-score {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .results-message {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .results-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .select-all {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .select-all button {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇪🇸 Spanska Verbövningar Åk 9 🇪🇸</h1>
+            <p>Kapitel 4 - Övning gör mästare!</p>
+        </div>
+        
+        <!-- Meny Screen -->
+        <div id="menuScreen" class="screen active">
+            <h2 class="text-center" style="margin-bottom: 30px; color: #667eea;">Välj spelläge</h2>
+            <div class="mode-selector">
+                <button class="mode-btn active" onclick="selectMode('verbs')">Verbböjningar</button>
+                <button class="mode-btn" onclick="selectMode('translations')">Översättningar</button>
+            </div>
+        </div>
+        
+        <!-- Urvals Screen -->
+        <div id="selectionScreen" class="screen">
+            <h2 class="text-center" style="margin-bottom: 20px; color: #667eea;">Välj övningar</h2>
+            
+            <div class="select-all">
+                <button class="btn btn-secondary" onclick="selectAll()">Markera alla</button>
+                <button class="btn btn-secondary" onclick="deselectAll()">Avmarkera alla</button>
+            </div>
+            
+            <div id="sectionList" class="section-list"></div>
+            
+            <div class="controls">
+                <button class="btn btn-secondary" onclick="backToMenu()">Tillbaka</button>
+                <button class="btn btn-primary" onclick="startExercise()" id="startBtn">Starta övning</button>
+            </div>
+        </div>
+        
+        <!-- Övnings Screen -->
+        <div id="exerciseScreen" class="screen">
+            <div class="progress-text" id="progressText"></div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <div class="question-card">
+                <div class="question-section" id="questionSection"></div>
+                <div class="question-text" id="questionText"></div>
+                <div class="question-hint" id="questionHint"></div>
+                
+                <div class="attempts" id="attemptsText"></div>
+                
+                <input type="text" class="answer-input" id="answerInput" placeholder="Skriv ditt svar här...">
+                
+                <div class="feedback" id="feedback"></div>
+                
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="checkAnswer()" id="checkBtn">Kontrollera</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn" style="display: none;">Nästa</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resultat Screen -->
+        <div id="resultsScreen" class="screen">
+            <div class="results-card">
+                <div class="results-score" id="resultsScore"></div>
+                <div class="results-message" id="resultsMessage"></div>
+                
+                <div class="results-stats">
+                    <div class="stat-box">
+                        <div class="stat-number" id="totalQuestions">0</div>
+                        <div class="stat-label">Totalt frågor</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="correctAnswers">0</div>
+                        <div class="stat-label">Rätt</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="wrongAnswers">0</div>
+                        <div class="stat-label">Fel</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="firstTryCorrect">0</div>
+                        <div class="stat-label">Rätt första gången</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button class="btn btn-secondary" onclick="backToMenu()">Meny</button>
+                <button class="btn btn-primary" onclick="restartAll()">Starta om alla</button>
+                <button class="btn btn-primary" onclick="restartWrong()" id="restartWrongBtn">Starta om felen</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentMode = 'verbs';
+        let selectedSections = [];
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let attempts = 0;
+        let stats = {
+            total: 0,
+            correct: 0,
+            wrong: 0,
+            firstTry: 0,
+            wrongQuestions: []
+        };
+        
+        const verbExercises = [
+            {
+                id: 'presens1',
+                title: "Presens - Nutid (Set 1)",
+                questions: [
+                    { q: "Mis amigos _____ un libro.", hint: "(skriva)", answer: "escriben" },
+                    { q: "Vosotros _____ a España.", hint: "(åka)", answer: "vais" },
+                    { q: "Por qué no _____ ustedes?", hint: "(äta)", answer: "comen" },
+                    { q: "Ana y yo _____ el texto.", hint: "(läsa)", answer: "leemos" },
+                    { q: "Los niños _____ mucho.", hint: "(fråga)", answer: "preguntan" },
+                    { q: "¿Qué _____ tú?", hint: "(säga)", answer: "dices" },
+                    { q: "Yo _____ la ciudad.", hint: "(känna till)", answer: "conozco" }
+                ]
+            },
+            {
+                id: 'diftong',
+                title: "Presens - Diftongerande verb",
+                questions: [
+                    { q: "Yo _____ en la escuela.", hint: "(tänka)", answer: "pienso" },
+                    { q: "María y tú _____ al tenis.", hint: "(spela)", answer: "jugáis" },
+                    { q: "Tú _____ todo el día.", hint: "(sova)", answer: "duermes" },
+                    { q: "Vosotras _____ tarde.", hint: "(börja)", answer: "empezáis" },
+                    { q: "Tú y yo _____ la puerta.", hint: "(stänga)", answer: "cerramos" },
+                    { q: "Pablo _____ la música pop.", hint: "(föredra)", answer: "prefiere" },
+                    { q: "Usted _____ estudiar mucho.", hint: "(bruka)", answer: "suele" },
+                    { q: "Nosotros _____ hablar mañana.", hint: "(kunna)", answer: "podemos" },
+                    { q: "¿Ustedes _____ sueco?", hint: "(förstå)", answer: "entienden" },
+                    { q: "¿Vosotros _____ estudiar?", hint: "(vilja)", answer: "queréis" },
+                    { q: "Tú _____ a las siete.", hint: "(återvända)", answer: "vuelves" }
+                ]
+            },
+            {
+                id: 'perfekt1',
+                title: "Perfekt - Dåtid (Set 1)",
+                questions: [
+                    { q: "Tú _____ la tele, ¿no?", hint: "(se)", answer: "has visto" },
+                    { q: "Pedro _____ muchas novelas.", hint: "(läsa)", answer: "ha leído" },
+                    { q: "Yo _____ en casa.", hint: "(vänta)", answer: "he esperado" },
+                    { q: "Ustedes _____ mucho chocolate.", hint: "(köpa)", answer: "han comprado" },
+                    { q: "Carmen _____ cada noche.", hint: "(gå ut)", answer: "ha salido" },
+                    { q: "Vosotros _____ un libro.", hint: "(skriva)", answer: "habéis escrito" },
+                    { q: "Las chicas _____ a Madrid.", hint: "(åka)", answer: "han ido" },
+                    { q: "Alberto y yo _____ suerte.", hint: "(ha)", answer: "hemos tenido" },
+                    { q: "¿Qué _____ los niños?", hint: "(göra)", answer: "han hecho" }
+                ]
+            },
+            {
+                id: 'futurum1',
+                title: "Futurum - Framtid (Set 1)",
+                questions: [
+                    { q: "El hombre _____ sueco.", hint: "(lyssna)", answer: "va a escuchar" },
+                    { q: "Mi amigo y yo _____ tarde.", hint: "(återvända)", answer: "vamos a volver" },
+                    { q: "La profesora _____ la puerta.", hint: "(stänga)", answer: "va a cerrar" },
+                    { q: "Ustedes _____ ahora.", hint: "(gå ut)", answer: "van a salir" },
+                    { q: "Yo _____ una montaña.", hint: "(gå upp)", answer: "voy a subir" }
+                ]
+            },
+            {
+                id: 'gerundium1',
+                title: "Gerundium - Pågåendeform (Set 1)",
+                questions: [
+                    { q: "Usted _____ mucho.", hint: "(arbeta)", answer: "está trabajando" },
+                    { q: "Tú _____ agua.", hint: "(dricka)", answer: "estás bebiendo/estás tomando" },
+                    { q: "Las chicas _____ algo.", hint: "(förklara)", answer: "están explicando" },
+                    { q: "¿Qué _____ ustedes?", hint: "(göra)", answer: "están haciendo" },
+                    { q: "Yo _____ en un hotel.", hint: "(bo)", answer: "estoy viviendo" },
+                    { q: "Él _____ mucho.", hint: "(förstå)", answer: "está entendiendo/está comprendiendo" },
+                    { q: "Nosotros _____ fútbol.", hint: "(träna)", answer: "estamos entrenando" }
+                ]
+            },
+            {
+                id: 'presens2',
+                title: "Presens - Nutid (Set 2)",
+                questions: [
+                    { q: "Mis hermanos _____ a su madre.", hint: "(hjälpa)", answer: "ayudan" },
+                    { q: "Nosotros _____ una carta.", hint: "(skriva)", answer: "escribimos" },
+                    { q: "Tú _____ a Bolivia.", hint: "(åka)", answer: "vas" },
+                    { q: "Julia y tú _____ un libro.", hint: "(läsa)", answer: "leéis" },
+                    { q: "Yo _____ España bien.", hint: "(känna till)", answer: "conozco" },
+                    { q: "Antonio _____ a un volcán.", hint: "(gå upp)", answer: "sube" },
+                    { q: "Mi novio _____ de Argentina.", hint: "(vara)", answer: "es" },
+                    { q: "Ella _____ en mí.", hint: "(tro)", answer: "cree" }
+                ]
+            },
+            {
+                id: 'perfekt2',
+                title: "Perfekt - Dåtid (Set 2)",
+                questions: [
+                    { q: "La chica _____ inglés.", hint: "(prata)", answer: "ha hablado" },
+                    { q: "¿Tú no _____ los deberes?", hint: "(göra)", answer: "has hecho" },
+                    { q: "Yo _____ 'hola'.", hint: "(säga)", answer: "he dicho" },
+                    { q: "Mis hijos _____ el teléfono.", hint: "(svara)", answer: "han contestado" },
+                    { q: "Ustedes _____ la puerta.", hint: "(öppna)", answer: "han abierto" },
+                    { q: "Juan _____ agua.", hint: "(dricka)", answer: "ha bebido/ha tomado" },
+                    { q: "Nosotros _____ mucho.", hint: "(vänta)", answer: "hemos esperado" },
+                    { q: "¿Usted _____ algo?", hint: "(bestämma)", answer: "ha decidido" },
+                    { q: "Tu padre _____ una carta.", hint: "(skriva)", answer: "ha escrito" },
+                    { q: "Vosotros _____ la tele.", hint: "(se)", answer: "habéis visto" }
+                ]
+            },
+            {
+                id: 'futurum2',
+                title: "Futurum - Framtid (Set 2)",
+                questions: [
+                    { q: "Yo _____ en la casa.", hint: "(förklara)", answer: "voy a explicar" },
+                    { q: "Ustedes _____ al fútbol.", hint: "(spela)", answer: "van a jugar" },
+                    { q: "Ella _____ a España.", hint: "(komma fram)", answer: "va a llegar" },
+                    { q: "Tú _____ un texto.", hint: "(skriva)", answer: "vas a escribir" },
+                    { q: "Nosotros _____ mañana.", hint: "(gå ut)", answer: "vamos a salir" }
+                ]
+            },
+            {
+                id: 'gerundium2',
+                title: "Gerundium - Pågåendeform (Set 2)",
+                questions: [
+                    { q: "Ustedes _____ mucho.", hint: "(studera)", answer: "están estudiando" },
+                    { q: "Yo _____ pan.", hint: "(äta)", answer: "estoy comiendo" },
+                    { q: "Nosotros _____ adiós.", hint: "(säga)", answer: "estamos diciendo" },
+                    { q: "¿Adónde _____ usted?", hint: "(åka)", answer: "está yendo" },
+                    { q: "Tú _____ en un hotel.", hint: "(bo)", answer: "estás viviendo" },
+                    { q: "Ellos _____ una película.", hint: "(se)", answer: "están viendo" },
+                    { q: "Vosotros _____ revistas.", hint: "(läsa)", answer: "estáis leyendo" },
+                    { q: "Mis padres _____ mucho.", hint: "(arbeta)", answer: "están trabajando" },
+                    { q: "Ella _____ la ventana.", hint: "(öppna)", answer: "está abriendo" }
+                ]
+            }
+        ];
+        
+        const translationExercises = [
+            {
+                id: 'translations',
+                title: "Översättningar svenska-spanska",
+                questions: [
+                    { q: "Hur är ert schema? Vad tycker ni?", answer: "¿Cómo es vuestro horario? ¿Qué pensáis?" },
+                    { q: "Jag tycker att det är ganska dåligt.", answer: "Pienso que es bastante malo." },
+                    { q: "Håller du med? Gillar du det inte?", answer: "¿Estás de acuerdo? ¿No te gusta?" },
+                    { q: "Jag tycker det är bättre att börja tidigt.", answer: "Pienso que es mejor empezar temprano." },
+                    { q: "Vi föredrar att sluta sent och inte ha läxor.", answer: "Preferimos terminar tarde y no tener deberes." },
+                    { q: "Jag skulle vilja sluta tidigare varje dag.", answer: "Me gustaría terminar más temprano todos los días." },
+                    { q: "Brukar du spela tennis med dina kompisar?", answer: "¿Sueles jugar (al) tenis con tus amigos?" },
+                    { q: "Nu håller vi på att prata om när vi ska spela.", answer: "Ahora estamos hablando de cuándo vamos a jugar." },
+                    { q: "Vill ni spela tennis i helgen?", answer: "¿Queréis jugar (al) tenis este fin de semana?" },
+                    { q: "Vilken dag föredrar ni att spela?", answer: "¿Qué día preferís jugar?" },
+                    { q: "Vi tycker det är bättre om vi spelar på lördag.", answer: "Pensamos que es mejor si jugamos el sábado." },
+                    { q: "Du kan gå till festen efteråt.", answer: "Puedes ir a la fiesta después." },
+                    { q: "Spelar du inte med din mamma på söndagar?", answer: "¿No juegas con tu madre los domingos?" },
+                    { q: "Ibland ja, men den här helgen kan hon inte, hon måste jobba.", answer: "A veces sí, pero este fin de semana no puede, tiene que trabajar." },
+                    { q: "Vad har Julia sagt? Kan hon spela?", answer: "¿Qué ha dicho Julia? ¿Puede jugar?" },
+                    { q: "Men vilken tid träffas vi? Klockan halv ett?", answer: "¿Pero a qué hora quedamos? ¿A las doce y media?" },
+                    { q: "Vilken tråkig lektion! Vi går till cafeterian.", answer: "¡Qué clase más aburrida! Vamos a la cafetería." },
+                    { q: "Jag har lust att äta något. Jag är alltid hungrig.", answer: "Tengo ganas de comer algo. Siempre tengo hambre." },
+                    { q: "Kaffe med mjölk! Vad gott!", answer: "¡Café con leche! ¡Qué rico!" },
+                    { q: "Jag förstår inte varför vi måste plugga så mycket. Det är så tråkigt.", answer: "No entiendo por qué tenemos que estudiar tanto. Es tan aburrido." },
+                    { q: "Men för mig är skolan viktig.", answer: "Pero para mí el colegio es importante." },
+                    { q: "Jag vill få bra betyg och komma in på något gymnasium.", answer: "Quiero sacar buenas notas y entrar en algún instituto." },
+                    { q: "Jag skulle vilja tjäna tillräckligt med pengar.", answer: "Me gustaría ganar suficiente dinero." },
+                    { q: "Varför vill du tjäna så mycket pengar? Vill du köpa en bil?", answer: "¿Por qué quieres ganar tanto dinero? ¿Quieres comprar un coche?" },
+                    { q: "Vad tycker du? Vad är det viktigaste för dig?", answer: "¿Qué piensas? ¿Qué es lo más importante para ti?" },
+                    { q: "Vad skulle du vilja göra i framtiden?", answer: "¿Qué te gustaría hacer en el futuro?" },
+                    { q: "Jag vill göra något viktigt men jag vet inte vad.", answer: "Quiero hacer algo importante pero no sé qué." },
+                    { q: "Vill du resa och lära känna folk från andra delar av världen?", answer: "¿Quieres viajar y conocer gente de otras partes del mundo?" },
+                    { q: "Jag skulle också vilja bo och arbeta i ett annat land.", answer: "También me gustaría vivir y trabajar en otro país." },
+                    { q: "Med vad skulle du vilja jobba?", answer: "¿Con qué te gustaría trabajar?" },
+                    { q: "Jag vill kanske bli läkare och därför måste jag få bra betyg.", answer: "Quizás quiero ser médico y por eso tengo que sacar buenas notas." },
+                    { q: "Om fem år kommer jag tjäna mer pengar än alla ni tillsammans.", answer: "En cinco años voy a ganar más dinero que todos vosotros juntos." }
+                ]
+            }
+        ];
+        
+        function selectMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+        
+        function backToMenu() {
+            showScreen('menuScreen');
+            resetStats();
+        }
+        
+        function selectAll() {
+            document.querySelectorAll('#sectionList input[type="checkbox"]').forEach(cb => cb.checked = true);
+        }
+        
+        function deselectAll() {
+            document.querySelectorAll('#sectionList input[type="checkbox"]').forEach(cb => cb.checked = false);
+        }
+        
+        function loadSections() {
+            const sections = currentMode === 'verbs' ? verbExercises : translationExercises;
+            const listContainer = document.getElementById('sectionList');
+            listContainer.innerHTML = '';
+            
+            sections.forEach(section => {
+                const div = document.createElement('div');
+                div.className = 'section-checkbox';
+                div.innerHTML = `
+                    <input type="checkbox" id="section-${section.id}" value="${section.id}">
+                    <label for="section-${section.id}">${section.title} (${section.questions.length} frågor)</label>
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+        
+        document.querySelectorAll('.mode-btn')[0].addEventListener('click', function() {
+            loadSections();
+            showScreen('selectionScreen');
+        });
+        
+        document.querySelectorAll('.mode-btn')[1].addEventListener('click', function() {
+            loadSections();
+            showScreen('selectionScreen');
+        });
+        
+        function startExercise() {
+            const checkboxes = document.querySelectorAll('#sectionList input[type="checkbox"]:checked');
+            
+            if (checkboxes.length === 0) {
+                alert('Välj minst en övningssektion!');
+                return;
+            }
+            
+            selectedSections = Array.from(checkboxes).map(cb => cb.value);
+            
+            currentQuestions = [];
+            const sections = currentMode === 'verbs' ? verbExercises : translationExercises;
+            
+            sections.forEach(section => {
+                if (selectedSections.includes(section.id)) {
+                    section.questions.forEach(q => {
+                        currentQuestions.push({
+                            ...q,
+                            sectionTitle: section.title
+                        });
+                    });
+                }
+            });
+            
+            currentQuestionIndex = 0;
+            resetStats();
+            stats.total = currentQuestions.length;
+            
+            showScreen('exerciseScreen');
+            loadQuestion();
+        }
+        
+        function resetStats() {
+            stats = {
+                total: 0,
+                correct: 0,
+                wrong: 0,
+                firstTry: 0,
+                wrongQuestions: []
+            };
+        }
+        
+        function loadQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length) {
+                showResults();
+                return;
+            }
+            
+            const question = currentQuestions[currentQuestionIndex];
+            attempts = 0;
+            
+            document.getElementById('progressText').textContent = 
+                `Fråga ${currentQuestionIndex + 1} av ${currentQuestions.length}`;
+            document.getElementById('progressFill').style.width = 
+                `${((currentQuestionIndex) / currentQuestions.length) * 100}%`;
+            
+            document.getElementById('questionSection').textContent = question.sectionTitle;
+            document.getElementById('questionText').textContent = question.q;
+            document.getElementById('questionHint').textContent = question.hint || '';
+            document.getElementById('questionHint').style.display = question.hint ? 'block' : 'none';
+            
+            document.getElementById('answerInput').value = '';
+            document.getElementById('answerInput').className = 'answer-input';
+            document.getElementById('answerInput').disabled = false;
+            document.getElementById('answerInput').focus();
+            
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('attemptsText').textContent = 'Försök 1 av 2';
+            
+            document.getElementById('checkBtn').style.display = 'inline-block';
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+        
+        function normalizeText(text) {
+            return text.toLowerCase()
+                .trim()
+                .replace(/\s+/g, ' ')
+                .replace(/[¿?¡!.]/g, '')
+                .replace(/\(al\)/g, '')
+                .replace(/al/g, '')
+                .replace(/\(/g, '')
+                .replace(/\)/g, '');
+        }
+        
+        function checkAnswer() {
+            attempts++;
+            
+            const userAnswer = normalizeText(document.getElementById('answerInput').value);
+            const question = currentQuestions[currentQuestionIndex];
+            const correctAnswers = question.answer.toLowerCase().split('/').map(a => normalizeText(a));
+            
+            const isCorrect = correctAnswers.some(answer => userAnswer === answer);
+            
+            if (isCorrect) {
+                document.getElementById('answerInput').className = 'answer-input correct';
+                document.getElementById('feedback').className = 'feedback correct show';
+                document.getElementById('feedback').innerHTML = '✓ <strong>Rätt!</strong> Bra jobbat!';
+                
+                stats.correct++;
+                if (attempts === 1) {
+                    stats.firstTry++;
+                }
+                
+                document.getElementById('checkBtn').style.display = 'none';
+                document.getElementById('nextBtn').style.display = 'inline-block';
+                document.getElementById('answerInput').disabled = true;
+            } else {
+                if (attempts >= 2) {
+                    document.getElementById('answerInput').className = 'answer-input incorrect';
+                    document.getElementById('feedback').className = 'feedback incorrect show';
+                    document.getElementById('feedback').innerHTML = 
+                        `✗ <strong>Tyvärr!</strong><br>Rätt svar: <strong>${question.answer}</strong>`;
+                    
+                    stats.wrong++;
+                    stats.wrongQuestions.push({...question, index: currentQuestionIndex});
+                    
+                    document.getElementById('checkBtn').style.display = 'none';
+                    document.getElementById('nextBtn').style.display = 'inline-block';
+                    document.getElementById('answerInput').disabled = true;
+                } else {
+                    document.getElementById('answerInput').className = 'answer-input incorrect';
+                    document.getElementById('feedback').className = 'feedback incorrect show';
+                    document.getElementById('feedback').innerHTML = '✗ <strong>Fel svar.</strong> Försök igen!';
+                    document.getElementById('attemptsText').textContent = 'Försök 2 av 2';
+                    document.getElementById('answerInput').select();
+                }
+            }
+        }
+        
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+        
+        function showResults() {
+            const percentage = Math.round((stats.correct / stats.total) * 100);
+            
+            document.getElementById('resultsScore').textContent = `${percentage}%`;
+            
+            let message = '';
+            if (percentage === 100) {
+                message = '🎉 Perfekt! Du är en stjärna!';
+            } else if (percentage >= 80) {
+                message = '👍 Bra jobbat! Fortsätt så!';
+            } else if (percentage >= 60) {
+                message = '💪 Du är på rätt väg!';
+            } else {
+                message = '📚 Fortsätt öva så blir det bättre!';
+            }
+            document.getElementById('resultsMessage').textContent = message;
+            
+            document.getElementById('totalQuestions').textContent = stats.total;
+            document.getElementById('correctAnswers').textContent = stats.correct;
+            document.getElementById('wrongAnswers').textContent = stats.wrong;
+            document.getElementById('firstTryCorrect').textContent = stats.firstTry;
+            
+            const restartWrongBtn = document.getElementById('restartWrongBtn');
+            if (stats.wrongQuestions.length > 0) {
+                restartWrongBtn.style.display = 'inline-block';
+            } else {
+                restartWrongBtn.style.display = 'none';
+            }
+            
+            showScreen('resultsScreen');
+        }
+        
+        function restartAll() {
+            startExercise();
+        }
+        
+        function restartWrong() {
+            if (stats.wrongQuestions.length === 0) {
+                alert('Inga fel att öva på!');
+                return;
+            }
+            
+            currentQuestions = [...stats.wrongQuestions];
+            currentQuestionIndex = 0;
+            resetStats();
+            stats.total = currentQuestions.length;
+            
+            showScreen('exerciseScreen');
+            loadQuestion();
+        }
+        
+        document.getElementById('answerInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                if (document.getElementById('checkBtn').style.display !== 'none') {
+                    checkAnswer();
+                } else {
+                    nextQuestion();
+                }
+            }
+        });
+        
+        // Initialize mode buttons with proper event listeners
+        document.querySelectorAll('.mode-btn').forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                selectMode(index === 0 ? 'verbs' : 'translations');
+                loadSections();
+                showScreen('selectionScreen');
+            });
+        });
+    </script>
+</body>
+</html>
