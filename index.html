@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spanska Verbövningar Åk 9</title>
+    <title>Spanska Verbövningar</title>
     <style>
         * {
             margin: 0;
@@ -325,8 +325,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🇪🇸 Spanska Verbövningar Åk 9 🇪🇸</h1>
-            <p>Kapitel 4 - Övning gör mästare!</p>
+            <h1>🇪🇸 Spanska Verbövningar 🇪🇸</h1>
+            <p>Reflexiva verb & Översättningar</p>
         </div>
         
         <!-- Meny Screen -->
@@ -434,12 +434,28 @@
                 title: "Presens - Nutid (Set 1)",
                 questions: [
                     { q: "Mis amigos _____ un libro.", hint: "(skriva)", answer: "escriben" },
+                    { q: "Yo _____ en la escuela.", hint: "(lära sig)", answer: "aprendo" },
                     { q: "Vosotros _____ a España.", hint: "(åka)", answer: "vais" },
                     { q: "Por qué no _____ ustedes?", hint: "(äta)", answer: "comen" },
                     { q: "Ana y yo _____ el texto.", hint: "(läsa)", answer: "leemos" },
                     { q: "Los niños _____ mucho.", hint: "(fråga)", answer: "preguntan" },
                     { q: "¿Qué _____ tú?", hint: "(säga)", answer: "dices" },
                     { q: "Yo _____ la ciudad.", hint: "(känna till)", answer: "conozco" }
+                ]
+            },
+            {
+                id: 'reflexiva',
+                title: "Reflexiva verb - Presens",
+                questions: [
+                    { q: "Mis padres _____ a las seis.", hint: "(stiga upp)", answer: "se levantan" },
+                    { q: "Tú _____ muy tarde.", hint: "(lägga sig)", answer: "te acuestas" },
+                    { q: "Laura y yo _____.", hint: "(tvätta sig)", answer: "nos lavamos" },
+                    { q: "Yo _____ la ropa.", hint: "(sätta på sig)", answer: "me pongo" },
+                    { q: "Felipe _____ todos los días.", hint: "(duscha)", answer: "se ducha" },
+                    { q: "Ellos _____ siempre.", hint: "(kamma sig)", answer: "se peinan" },
+                    { q: "Usted _____ mucho.", hint: "(sminka sig)", answer: "se maquilla" },
+                    { q: "La chica _____ María.", hint: "(heta)", answer: "se llama" },
+                    { q: "Yo _____ en casa.", hint: "(stanna kvar)", answer: "me quedo" }
                 ]
             },
             {
@@ -453,15 +469,12 @@
                     { q: "Tú y yo _____ la puerta.", hint: "(stänga)", answer: "cerramos" },
                     { q: "Pablo _____ la música pop.", hint: "(föredra)", answer: "prefiere" },
                     { q: "Usted _____ estudiar mucho.", hint: "(bruka)", answer: "suele" },
-                    { q: "Nosotros _____ hablar mañana.", hint: "(kunna)", answer: "podemos" },
-                    { q: "¿Ustedes _____ sueco?", hint: "(förstå)", answer: "entienden" },
-                    { q: "¿Vosotros _____ estudiar?", hint: "(vilja)", answer: "queréis" },
-                    { q: "Tú _____ a las siete.", hint: "(återvända)", answer: "vuelves" }
+                    { q: "Nosotros _____ hablar mañana.", hint: "(kunna)", answer: "podemos" }
                 ]
             },
             {
                 id: 'perfekt1',
-                title: "Perfekt - Dåtid (Set 1)",
+                title: "Perfekt - Dåtid",
                 questions: [
                     { q: "Tú _____ la tele, ¿no?", hint: "(se)", answer: "has visto" },
                     { q: "Pedro _____ muchas novelas.", hint: "(läsa)", answer: "ha leído" },
@@ -476,7 +489,7 @@
             },
             {
                 id: 'futurum1',
-                title: "Futurum - Framtid (Set 1)",
+                title: "Futurum - Framtid",
                 questions: [
                     { q: "El hombre _____ sueco.", hint: "(lyssna)", answer: "va a escuchar" },
                     { q: "Mi amigo y yo _____ tarde.", hint: "(återvända)", answer: "vamos a volver" },
@@ -487,112 +500,50 @@
             },
             {
                 id: 'gerundium1',
-                title: "Gerundium - Pågåendeform (Set 1)",
+                title: "Gerundium - Pågåendeform",
                 questions: [
                     { q: "Usted _____ mucho.", hint: "(arbeta)", answer: "está trabajando" },
-                    { q: "Tú _____ agua.", hint: "(dricka)", answer: "estás bebiendo/estás tomando" },
+                    { q: "Tú _____ agua.", hint: "(dricka)", answer: "estás bebiendo" },
                     { q: "Las chicas _____ algo.", hint: "(förklara)", answer: "están explicando" },
                     { q: "¿Qué _____ ustedes?", hint: "(göra)", answer: "están haciendo" },
                     { q: "Yo _____ en un hotel.", hint: "(bo)", answer: "estoy viviendo" },
                     { q: "Él _____ mucho.", hint: "(förstå)", answer: "está entendiendo/está comprendiendo" },
                     { q: "Nosotros _____ fútbol.", hint: "(träna)", answer: "estamos entrenando" }
                 ]
-            },
-            {
-                id: 'presens2',
-                title: "Presens - Nutid (Set 2)",
-                questions: [
-                    { q: "Mis hermanos _____ a su madre.", hint: "(hjälpa)", answer: "ayudan" },
-                    { q: "Nosotros _____ una carta.", hint: "(skriva)", answer: "escribimos" },
-                    { q: "Tú _____ a Bolivia.", hint: "(åka)", answer: "vas" },
-                    { q: "Julia y tú _____ un libro.", hint: "(läsa)", answer: "leéis" },
-                    { q: "Yo _____ España bien.", hint: "(känna till)", answer: "conozco" },
-                    { q: "Antonio _____ a un volcán.", hint: "(gå upp)", answer: "sube" },
-                    { q: "Mi novio _____ de Argentina.", hint: "(vara)", answer: "es" },
-                    { q: "Ella _____ en mí.", hint: "(tro)", answer: "cree" }
-                ]
-            },
-            {
-                id: 'perfekt2',
-                title: "Perfekt - Dåtid (Set 2)",
-                questions: [
-                    { q: "La chica _____ inglés.", hint: "(prata)", answer: "ha hablado" },
-                    { q: "¿Tú no _____ los deberes?", hint: "(göra)", answer: "has hecho" },
-                    { q: "Yo _____ 'hola'.", hint: "(säga)", answer: "he dicho" },
-                    { q: "Mis hijos _____ el teléfono.", hint: "(svara)", answer: "han contestado" },
-                    { q: "Ustedes _____ la puerta.", hint: "(öppna)", answer: "han abierto" },
-                    { q: "Juan _____ agua.", hint: "(dricka)", answer: "ha bebido/ha tomado" },
-                    { q: "Nosotros _____ mucho.", hint: "(vänta)", answer: "hemos esperado" },
-                    { q: "¿Usted _____ algo?", hint: "(bestämma)", answer: "ha decidido" },
-                    { q: "Tu padre _____ una carta.", hint: "(skriva)", answer: "ha escrito" },
-                    { q: "Vosotros _____ la tele.", hint: "(se)", answer: "habéis visto" }
-                ]
-            },
-            {
-                id: 'futurum2',
-                title: "Futurum - Framtid (Set 2)",
-                questions: [
-                    { q: "Yo _____ en la casa.", hint: "(förklara)", answer: "voy a explicar" },
-                    { q: "Ustedes _____ al fútbol.", hint: "(spela)", answer: "van a jugar" },
-                    { q: "Ella _____ a España.", hint: "(komma fram)", answer: "va a llegar" },
-                    { q: "Tú _____ un texto.", hint: "(skriva)", answer: "vas a escribir" },
-                    { q: "Nosotros _____ mañana.", hint: "(gå ut)", answer: "vamos a salir" }
-                ]
-            },
-            {
-                id: 'gerundium2',
-                title: "Gerundium - Pågåendeform (Set 2)",
-                questions: [
-                    { q: "Ustedes _____ mucho.", hint: "(studera)", answer: "están estudiando" },
-                    { q: "Yo _____ pan.", hint: "(äta)", answer: "estoy comiendo" },
-                    { q: "Nosotros _____ adiós.", hint: "(säga)", answer: "estamos diciendo" },
-                    { q: "¿Adónde _____ usted?", hint: "(åka)", answer: "está yendo" },
-                    { q: "Tú _____ en un hotel.", hint: "(bo)", answer: "estás viviendo" },
-                    { q: "Ellos _____ una película.", hint: "(se)", answer: "están viendo" },
-                    { q: "Vosotros _____ revistas.", hint: "(läsa)", answer: "estáis leyendo" },
-                    { q: "Mis padres _____ mucho.", hint: "(arbeta)", answer: "están trabajando" },
-                    { q: "Ella _____ la ventana.", hint: "(öppna)", answer: "está abriendo" }
-                ]
             }
         ];
         
         const translationExercises = [
             {
-                id: 'translations',
-                title: "Översättningar svenska-spanska",
+                id: 'translations1',
+                title: "Översättningar - Del 1 (meningar 1-10)",
                 questions: [
-                    { q: "Hur är ert schema? Vad tycker ni?", answer: "¿Cómo es vuestro horario? ¿Qué pensáis?" },
-                    { q: "Jag tycker att det är ganska dåligt.", answer: "Pienso que es bastante malo." },
-                    { q: "Håller du med? Gillar du det inte?", answer: "¿Estás de acuerdo? ¿No te gusta?" },
-                    { q: "Jag tycker det är bättre att börja tidigt.", answer: "Pienso que es mejor empezar temprano." },
-                    { q: "Vi föredrar att sluta sent och inte ha läxor.", answer: "Preferimos terminar tarde y no tener deberes." },
-                    { q: "Jag skulle vilja sluta tidigare varje dag.", answer: "Me gustaría terminar más temprano todos los días." },
-                    { q: "Brukar du spela tennis med dina kompisar?", answer: "¿Sueles jugar (al) tenis con tus amigos?" },
-                    { q: "Nu håller vi på att prata om när vi ska spela.", answer: "Ahora estamos hablando de cuándo vamos a jugar." },
-                    { q: "Vill ni spela tennis i helgen?", answer: "¿Queréis jugar (al) tenis este fin de semana?" },
-                    { q: "Vilken dag föredrar ni att spela?", answer: "¿Qué día preferís jugar?" },
-                    { q: "Vi tycker det är bättre om vi spelar på lördag.", answer: "Pensamos que es mejor si jugamos el sábado." },
-                    { q: "Du kan gå till festen efteråt.", answer: "Puedes ir a la fiesta después." },
-                    { q: "Spelar du inte med din mamma på söndagar?", answer: "¿No juegas con tu madre los domingos?" },
-                    { q: "Ibland ja, men den här helgen kan hon inte, hon måste jobba.", answer: "A veces sí, pero este fin de semana no puede, tiene que trabajar." },
-                    { q: "Vad har Julia sagt? Kan hon spela?", answer: "¿Qué ha dicho Julia? ¿Puede jugar?" },
-                    { q: "Men vilken tid träffas vi? Klockan halv ett?", answer: "¿Pero a qué hora quedamos? ¿A las doce y media?" },
-                    { q: "Vilken tråkig lektion! Vi går till cafeterian.", answer: "¡Qué clase más aburrida! Vamos a la cafetería." },
-                    { q: "Jag har lust att äta något. Jag är alltid hungrig.", answer: "Tengo ganas de comer algo. Siempre tengo hambre." },
-                    { q: "Kaffe med mjölk! Vad gott!", answer: "¡Café con leche! ¡Qué rico!" },
-                    { q: "Jag förstår inte varför vi måste plugga så mycket. Det är så tråkigt.", answer: "No entiendo por qué tenemos que estudiar tanto. Es tan aburrido." },
-                    { q: "Men för mig är skolan viktig.", answer: "Pero para mí el colegio es importante." },
-                    { q: "Jag vill få bra betyg och komma in på något gymnasium.", answer: "Quiero sacar buenas notas y entrar en algún instituto." },
-                    { q: "Jag skulle vilja tjäna tillräckligt med pengar.", answer: "Me gustaría ganar suficiente dinero." },
-                    { q: "Varför vill du tjäna så mycket pengar? Vill du köpa en bil?", answer: "¿Por qué quieres ganar tanto dinero? ¿Quieres comprar un coche?" },
-                    { q: "Vad tycker du? Vad är det viktigaste för dig?", answer: "¿Qué piensas? ¿Qué es lo más importante para ti?" },
-                    { q: "Vad skulle du vilja göra i framtiden?", answer: "¿Qué te gustaría hacer en el futuro?" },
-                    { q: "Jag vill göra något viktigt men jag vet inte vad.", answer: "Quiero hacer algo importante pero no sé qué." },
-                    { q: "Vill du resa och lära känna folk från andra delar av världen?", answer: "¿Quieres viajar y conocer gente de otras partes del mundo?" },
-                    { q: "Jag skulle också vilja bo och arbeta i ett annat land.", answer: "También me gustaría vivir y trabajar en otro país." },
-                    { q: "Med vad skulle du vilja jobba?", answer: "¿Con qué te gustaría trabajar?" },
-                    { q: "Jag vill kanske bli läkare och därför måste jag få bra betyg.", answer: "Quizás quiero ser médico y por eso tengo que sacar buenas notas." },
-                    { q: "Om fem år kommer jag tjäna mer pengar än alla ni tillsammans.", answer: "En cinco años voy a ganar más dinero que todos vosotros juntos." }
+                    { q: "Jag tvättar mig och du kammar dig.", answer: "(Yo) me lavo y (tú) te peinas" },
+                    { q: "Vilken tid stiger ni upp på morgonen?", answer: "¿A qué hora os levantáis por la mañana?" },
+                    { q: "Hon sminkar sig och de duschar.", answer: "(Ella) se maquilla y (ellos) se duchan." },
+                    { q: "Du stannar kvar men jag lägger mig.", answer: "(Tú) te quedas pero (yo) me acuesto." },
+                    { q: "Hur mycket tid behöver vi hemma?", answer: "¿Cuánto tiempo necesitamos en casa?" },
+                    { q: "Ibland gör jag läxorna också.", answer: "A veces hago los deberes también." },
+                    { q: "Kära Pedro, det var länge sedan!", answer: "Querido Pedro, ¡cuánto tiempo sin verte!" },
+                    { q: "Vi har läst en roman, som tur är.", answer: "Hemos leído una novela, por suerte." },
+                    { q: "Hur många gånger ska hon återvända till Centralamerika?", answer: "¿Cuántas veces va a volver a América Central?" },
+                    { q: "Barnen på förskolan gör en utflykt till djungeln.", answer: "Los niños en el preescolar hacen una excursión a la selva tropical." }
+                ]
+            },
+            {
+                id: 'translations2',
+                title: "Översättningar - Del 2 (meningar 11-20)",
+                questions: [
+                    { q: "Ska du gå till fots eller ska du rida till turistbyrån?", answer: "¿Vas a ir a pie o vas a montar a caballo a la agencia de turismo?" },
+                    { q: "Aporna har varit mycket vänliga.", answer: "Los monos han sido/estado muy amables./Los monos han sido muy amables./Los monos han estado muy amables." },
+                    { q: "Jag har sett Stilla Havet, och imorgon ska jag se Karibiska Havet.", answer: "He visto el Océano Pacífico, y mañana voy a ver el Mar Caribe." },
+                    { q: "Nicaragua är det största landet i Centralamerika.", answer: "Nicaragua es el país más grande de América Central." },
+                    { q: "Länderna är olika, men också lika.", answer: "Los países son diferentes, pero también parecidos." },
+                    { q: "De exporterar framför allt bananer.", answer: "Exportan sobre todo plátanos." },
+                    { q: "Vi bor i en liten stad som heter Matagalpa.", answer: "Vivimos en una ciudad pequeña que se llama Matagalpa." },
+                    { q: "Majoriteten av befolkningen lever av jordbruket.", answer: "La mayoría de la población vive/viven de la agricultura./La mayoría de la población vive de la agricultura./La mayoría de la población viven de la agricultura." },
+                    { q: "De behöver köpa kaffe i matsalen.", answer: "Necesitan comprar café en el comedor." },
+                    { q: "Jag kan prata lite svenska.", answer: "Puedo hablar un poco de sueco." }
                 ]
             }
         ];
@@ -725,8 +676,10 @@
                 .trim()
                 .replace(/\s+/g, ' ')
                 .replace(/[¿?¡!.]/g, '')
-                .replace(/\(al\)/g, '')
-                .replace(/al/g, '')
+                .replace(/\(yo\)/g, '')
+                .replace(/\(tú\)/g, '')
+                .replace(/\(ella\)/g, '')
+                .replace(/\(ellos\)/g, '')
                 .replace(/\(/g, '')
                 .replace(/\)/g, '');
         }
